@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Black Friday: VRCHOL Šilajit Max za 24,99 € – otváracia ponuka</title>
+<title>Black Friday: VRCHOL Šilajit Max (shilajit + ashwagandha) za 24,99 €</title>
 <link rel="icon" href="https://lp.auravelis.eu/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="https://lp.auravelis.eu/favicon-16.png" sizes="16x16" type="image/png">
 <link rel="apple-touch-icon" href="https://lp.auravelis.eu/apple-touch-icon.png">
-<meta name="description" content="VRCHOL Šilajit Max, kapsuly pre mužov: ašvaganda, kotvičník zemný, šilajit, vitamín B6 a piperín v jednej kapsule. 30 kapsúl = mesiac. Doprava zadarmo od 3 fľaštičiek, dobierka, dodanie do 1–2 dní.">
+<meta name="description" content="Black Friday otváracia ponuka: VRCHOL Šilajit Max – shilajit (šilajit), ashwagandha (ašvaganda), kotvičník zemný, vitamín B6 a piperín v jednej kapsule. 1 fľaštička za 24,99 € do 30. 11. Dobierka, dodanie do 1–2 dní.">
 <link rel="preconnect" href="https://connect.facebook.net" crossorigin>
 <link rel="preload" as="image" href="assets/product.jpg" fetchpriority="high">
 
@@ -585,7 +585,7 @@ window.lpSlug = function(){
 
   
   <div class="deliv"><span>🚚</span><span>Dodanie do <b>1–2 dní</b></span></div>
-  <button class="atc" id="atc" onclick="kupi()"><span id="atc-label">Pridať do košíka · 24,99 € + 3,49 € doprava</span><span class="ar">→</span></button>
+  <button class="atc" id="atc" onclick="kupi()"><span id="atc-label">Objednať na dobierku · 24,99 € + 3,49 € doprava</span><span class="ar">→</span></button>
   <div class="guar"><span class="seal">🏅</span><span>30-DŇOVÁ ZÁRUKA VRÁTENIA PEŇAZÍ — ZA NEOTVORENÝ PRODUKT DOSTANEŠ SPÄŤ CELÚ SUMU.<sup>‡</sup></span></div>
   <div class="omnibus" id="bf-omni">*Black Friday cena 24,99 € platí pre 1 fľaštičku do 30. 11. 2026, raz na zákazníka; zľavový kód BLACKFRIDAY sa v košíku uplatní automaticky. Najnižšia cena za posledných 30 dní pred zľavou: 34,99 € za 1 fľaštičku. Prečiarknutá cena 34,99 € je bežná cena 1 fľaštičky.</div>
   <div class="stamps">
@@ -627,7 +627,7 @@ window.lpSlug = function(){
     <p class="lead">Pokryješ celé odporúčané 3-mesačné obdobie užívania bez ďalšej objednávky a ešte ti zostane zásoba — najnižšia cena za fľaštičku a všetky darčeky v cene!</p>
     <div class="upcard"><img src="assets/product.jpg" alt="VRCHOL Šilajit Max — fľaštička s 30 kapsulami" style="object-position:50% 42%" width="1024" height="1024" loading="lazy" decoding="async"><span class="chip">ÚSPORA 40 %</span></div>
     <div class="upmeta"><b>5x VRCHOL Šilajit Max — 150 kapsúl</b><div class="pr">104,95 € <s>174,95 €</s></div></div>
-    <button class="atc" onclick="buyTier(2)"><span>Pridať do košíka</span><span class="ar">→</span></button>
+    <button class="atc" onclick="buyTier(2)"><span>Objednať na dobierku</span><span class="ar">→</span></button>
   </div>
 </section>
 
@@ -889,7 +889,7 @@ function render(){
   document.getElementById('anchor-save').textContent = 'UŠETRÍŠ ' + fmt((COMPARE_AT_C-t.unitC)*t.qty);
   document.getElementById('anchor-save').style.display = document.getElementById('anchor-was').style.display = (COMPARE_AT_C>t.unitC?'':'none');
   document.getElementById('anchor-sub').textContent = 'Zásoba na '+(30*t.qty)+' dní | menej ako '+perDay(t.unitC)+' denne';
-  document.getElementById('atc-label').textContent = 'Pridať do košíka · ' + fmt(total) + (t.ship && !SINGLE_SHIPS_FREE ? SHIP_SUFFIX : '');
+  document.getElementById('atc-label').textContent = 'Objednať na dobierku · ' + fmt(total) + (t.ship && !SINGLE_SHIPS_FREE ? SHIP_SUFFIX : '');
   const rp = document.getElementById('recap-price'); if(rp) rp.textContent = fmt(total);
   const rs = document.getElementById('recap-sub'); if(rs) rs.textContent = t.sub.split(' + ')[0] + ' · ' + (30*t.qty) + ' dní rutiny';
 }
@@ -968,7 +968,7 @@ if(!BF_ON){
   document.getElementById('bf-pill').textContent = '💰 pod 1,20 € denne!';
   document.getElementById('bf-omni').textContent = '*Najnižšia cena za posledných 30 dní: 34,99 € za 1 fľaštičku, resp. 20,99 € za fľaštičku v balíku 5 ks.';
   document.getElementById('bf-punch').textContent = 'VRCHOL Šilajit Max: 34,99 € — všetko v jednej kapsule. V balíku 5 fľaštičiek len 20,99 € za fľaštičku.';
-  document.title = 'VRCHOL Šilajit Max – kapsuly pre mužov, päť zložiek v jednej kapsule';
+  document.title = 'VRCHOL Šilajit Max – shilajit a ashwagandha v jednej kapsule | kapsuly pre mužov';
 }
 </script>
 <script>
@@ -984,17 +984,22 @@ function __val(u){var v=0;try{(u.match(/\/cart\/([^?]+)/)||['',''])[1].split(','
   if(t)v+=t.unitC*parseInt(p[1]||'1',10);});}catch(e){} return Math.round(v)/100;}
 function __ic(u){try{fbq('track','InitiateCheckout',{content_type:'product',num_items:__cq(u),value:__val(u),currency:'EUR',
   content_ids:(u.match(/\/cart\/([^?]+)/)||['',''])[1].split(',').map(function(x){return x.split(':')[0]})});}catch(e){}}
-function __go(u){u=__dec(u);__ic(u);location.href=u;}
+
+var __utm=(function(){var o={};try{var q=new URLSearchParams(location.search);['utm_content','utm_campaign'].forEach(function(k){var v=q.get(k);if(!v){try{v=sessionStorage.getItem('lp_'+k)}catch(e){}}if(v){o[k]=String(v).slice(0,150);try{sessionStorage.setItem('lp_'+k,o[k])}catch(e){}}});}catch(e){}return o;})();
+function __price(id){try{var L=(typeof TIERS!=='undefined'?TIERS:(typeof OPTS!=='undefined'?OPTS:[]));for(var i=0;i<L.length;i++){if(L[i].variantId===id)return L[i].unitC?L[i].unitC/100:(L[i].total/L[i].qty);}}catch(e){}return 0;}
+function __cv(u){var v=0;try{(u.match(/\/cart\/([^?]+)/)||['',''])[1].split(',').forEach(function(x){var p=x.split(':');v+=__price(p[0])*parseInt(p[1]||'1',10);});}catch(e){}return Math.round(v*100)/100;}
+function __atc(u){try{fbq('track','AddToCart',{content_type:'product',num_items:__cq(u),value:__cv(u),currency:'EUR',content_ids:(u.match(/\/cart\/([^?]+)/)||['',''])[1].split(',').map(function(x){return x.split(':')[0]})});}catch(e){}}
+function __go(u){u=__dec(u);__atc(u);__ic(u);setTimeout(function(){location.href=u;},200);}
 document.addEventListener('click',function(e){
   var a=e.target&&e.target.closest?e.target.closest('a[href*="/cart/"]'):null;
-  if(a)__ic(a.href);
+  if(a){__atc(a.href);__ic(a.href);}
 },true);
 try{fbq('track','ViewContent',{content_type:'product',content_ids:['16149491908939'],content_name:document.title,value:(BF_ON?24.99:34.99),currency:'EUR'});}catch(e){}
 
 (function(){
   var SLUG=window.lpSlug(), sent={};
   function ev(n,x){ if(sent[n])return; sent[n]=1;
-    try{ fbq('trackCustom',n,Object.assign({content_name:SLUG},x||{})); }catch(e){} }
+    try{ fbq('trackCustom',n,Object.assign({content_name:SLUG},__utm,x||{})); }catch(e){} }
   var t0=Date.now();
   setTimeout(function(){ev('LP_Engaged30');},30000);
   setTimeout(function(){ev('LP_Engaged120');},120000);
@@ -1010,15 +1015,15 @@ try{fbq('track','ViewContent',{content_type:'product',content_ids:['161494919089
     if(t.closest('.dots,.thumbs,.thumb,[data-slide]'))ev('LP_Gallery');
   },true);
   addEventListener('pagehide',function(){
-    try{fbq('trackCustom','LP_Exit',{content_name:SLUG,
-      seconds:Math.round((Date.now()-t0)/1000)});}catch(e){}
+    try{fbq('trackCustom','LP_Exit',Object.assign({content_name:SLUG,
+      seconds:Math.round((Date.now()-t0)/1000)},__utm));}catch(e){}
   });
 })();
 
 (function(){
   var SLUG=window.lpSlug(), SK=SLUG.replace(/-/g,'_'), done={};
   function pev(n){ if(done[n])return; done[n]=1;
-    try{ fbq('trackCustom',n,{content_name:SLUG}); }catch(e){} }
+    try{ fbq('trackCustom',n,Object.assign({content_name:SLUG},__utm)); }catch(e){} }
   if(SLUG) pev('LPV_'+SK);
   setTimeout(function(){ if(SLUG) pev('LPE_'+SK); },30000);
   document.addEventListener('click',function(e){

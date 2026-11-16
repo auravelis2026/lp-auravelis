@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>VRCHOL Šilajit Max – kapsuly pre mužov, päť zložiek v jednej kapsule</title>
-<meta name="description" content="VRCHOL Šilajit Max, kapsuly pre mužov: ašvaganda, kotvičník zemný, šilajit, vitamín B6 a piperín v jednej kapsule. 30 ks = mesiac. Dobierka, doručenie do 1–2 dní.">
+<title>VRCHOL Šilajit Max – ashwagandha a shilajit v jednej kapsule | kapsuly pre mužov</title>
+<meta name="description" content="VRCHOL Šilajit Max, kapsuly pre mužov: ashwagandha (ašvaganda) 200 mg, shilajit (šilajit) 60 mg, kotvičník zemný, vitamín B6 a piperín v jednej kapsule. 30 ks = mesiac. Dobierka, doručenie do 1–2 dní.">
 <link rel="icon" href="https://lp.auravelis.eu/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="https://lp.auravelis.eu/favicon-16.png" sizes="16x16" type="image/png">
 <link rel="apple-touch-icon" href="https://lp.auravelis.eu/apple-touch-icon.png">
@@ -273,7 +273,7 @@ window.lpSlug = function(){
   <div id="opts"></div>
 
   
-  <button class="atc" id="atc" onclick="kupi()">PRIDAŤ DO KOŠÍKA — </button>
+  <button class="atc" id="atc" onclick="kupi()">OBJEDNAŤ NA DOBIERKU — </button>
 
   
   <div class="chips">
@@ -454,7 +454,7 @@ window.lpSlug = function(){
 <div class="satc" id="satc">
   <div class="in">
     <div class="mini"><b style="margin-left:auto">VRCHOL Šilajit Max</b></div>
-    <button class="atc" id="atc2" onclick="kupi()">PRIDAŤ DO KOŠÍKA — </button>
+    <button class="atc" id="atc2" onclick="kupi()">OBJEDNAŤ NA DOBIERKU — </button>
   </div>
 </div>
 
@@ -473,7 +473,7 @@ const GIFT_ATTR_KEY = "Darčeky", GIFT_ATTR_PREFIX = "1x na objednávku: ";
 const BASE = "https://sk.auravelis.eu";
 const SINGLE_SHIPS_FREE = true;   
 const SHIP_SUFFIX = " + 3,49 € doprava";
-const ATC_PREFIX = "PRIDAŤ DO KOŠÍKA — ";
+const ATC_PREFIX = "OBJEDNAŤ NA DOBIERKU — ";
 const fmt = n => new Intl.NumberFormat("sk-SK",{minimumFractionDigits:2,maximumFractionDigits:2}).format(n) + ' ' + "€";
 let sel = 0; // always preselect the single (owner rule)
 
@@ -543,17 +543,22 @@ function __dec(u){var q=__cq(u);
   return u;}
 function __ic(u){try{fbq('track','InitiateCheckout',{content_type:'product',num_items:__cq(u),currency:"EUR",
   content_ids:(u.match(/\/cart\/([^?]+)/)||['',''])[1].split(',').map(function(x){return x.split(':')[0]})});}catch(e){}}
-function __go(u){u=__dec(u);__ic(u);location.href=u;}
+
+var __utm=(function(){var o={};try{var q=new URLSearchParams(location.search);['utm_content','utm_campaign'].forEach(function(k){var v=q.get(k);if(!v){try{v=sessionStorage.getItem('lp_'+k)}catch(e){}}if(v){o[k]=String(v).slice(0,150);try{sessionStorage.setItem('lp_'+k,o[k])}catch(e){}}});}catch(e){}return o;})();
+function __price(id){try{var L=(typeof TIERS!=='undefined'?TIERS:(typeof OPTS!=='undefined'?OPTS:[]));for(var i=0;i<L.length;i++){if(L[i].variantId===id)return L[i].unitC?L[i].unitC/100:(L[i].total/L[i].qty);}}catch(e){}return 0;}
+function __cv(u){var v=0;try{(u.match(/\/cart\/([^?]+)/)||['',''])[1].split(',').forEach(function(x){var p=x.split(':');v+=__price(p[0])*parseInt(p[1]||'1',10);});}catch(e){}return Math.round(v*100)/100;}
+function __atc(u){try{fbq('track','AddToCart',{content_type:'product',num_items:__cq(u),value:__cv(u),currency:'EUR',content_ids:(u.match(/\/cart\/([^?]+)/)||['',''])[1].split(',').map(function(x){return x.split(':')[0]})});}catch(e){}}
+function __go(u){u=__dec(u);__atc(u);__ic(u);setTimeout(function(){location.href=u;},200);}
 document.addEventListener('click',function(e){
   var a=e.target&&e.target.closest?e.target.closest('a[href*="/cart/"]'):null;
-  if(a)__ic(a.href);
+  if(a){__atc(a.href);__ic(a.href);}
 },true);
 try{fbq('track','ViewContent',{content_type:'product',content_ids:['16149491908939'],content_name:document.title,currency:"EUR"});}catch(e){}
 
 (function(){
   var SLUG=window.lpSlug(), sent={};
   function ev(n,x){ if(sent[n])return; sent[n]=1;
-    try{ fbq('trackCustom',n,Object.assign({content_name:SLUG},x||{})); }catch(e){} }
+    try{ fbq('trackCustom',n,Object.assign({content_name:SLUG},__utm,x||{})); }catch(e){} }
   var t0=Date.now();
   setTimeout(function(){ev('LP_Engaged30');},30000);
   setTimeout(function(){ev('LP_Engaged120');},120000);
@@ -568,15 +573,15 @@ try{fbq('track','ViewContent',{content_type:'product',content_ids:['161494919089
     if(t.closest('.thumbs,.thumb,[data-slide]'))ev('LP_Gallery');
   },true);
   addEventListener('pagehide',function(){
-    try{fbq('trackCustom','LP_Exit',{content_name:SLUG,
-      seconds:Math.round((Date.now()-t0)/1000)});}catch(e){}
+    try{fbq('trackCustom','LP_Exit',Object.assign({content_name:SLUG,
+      seconds:Math.round((Date.now()-t0)/1000)},__utm));}catch(e){}
   });
 })();
 
 (function(){
   var SLUG=window.lpSlug(), SK=SLUG.replace(/-/g,'_'), done={};
   function pev(n){ if(done[n])return; done[n]=1;
-    try{ fbq('trackCustom',n,{content_name:SLUG}); }catch(e){} }
+    try{ fbq('trackCustom',n,Object.assign({content_name:SLUG},__utm)); }catch(e){} }
   if(SLUG) pev('LPV_'+SK);
   setTimeout(function(){ if(SLUG) pev('LPE_'+SK); },30000);
   document.addEventListener('click',function(e){
