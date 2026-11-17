@@ -42,6 +42,7 @@ h1,h2,h3,h4{margin:0;line-height:1.15}
 .annbar{background:#000;color:#fff;text-align:center;font-size:13px;font-weight:700;
   letter-spacing:.02em;padding:9px 12px}
 .annbar b{color:var(--gold2)}
+.promonote{font-size:12px;color:var(--mut);text-align:center;margin:8px 0 0;line-height:1.45}
 header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;
   border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:50}
 .logo{font-weight:800;font-size:20px;letter-spacing:.06em}
@@ -229,7 +230,7 @@ window.lpSlug = function(){
 </head>
 <body>
 
-<div class="annbar">PLATBA NA DOBIERKU · DORUČENIE DO 1–2 DNÍ · <b>OD 0,70 € NA DEŇ</b></div>
+<div class="annbar" id="annbar">BLACK FRIDAY · otváracia ponuka: 1 fľaštička za <b>24,99 €</b> namiesto 34,99 € — len do 30. 11.</div>
 
 <header>
   <span style="width:24px"></span>
@@ -262,7 +263,7 @@ window.lpSlug = function(){
   <ul class="blts">
     <li><span class="ic">🌿</span><div><b>Ashwagandha — extrakt z koreňa, 200 mg</b><span>Z koreňa, nie z listov. Presná dávka je napísaná na fľaštičke.</span></div></li>
     <li><span class="ic">🌄</span><div><b>Shilajit — 60 mg</b><span>Horská živica, po stáročia súčasť himalájskej tradície — v kapsule, bez lepkavej živice a odmeriavania.</span></div></li>
-    <li><span class="ic">💶</span><div><b>Od 0,70 € na deň</b><span>1 fľaštička 1,17 € na deň · balík 3 ks 0,77 € · balík 5 ks 0,70 € na deň. 1 kapsula denne.</span></div></li>
+    <li><span class="ic">💶</span><div><b>Od 0,70 € na deň</b><span>Balík 5 fľaštičiek 0,70 € na deň, balík 3 fľaštičiek 0,77 € na deň. 1 kapsula denne.</span></div></li>
     <li><span class="ic">📦</span><div><b>Platba na dobierku, doručenie do 1–2 dní</b><span>Platíš až kuriérovi. Poplatok za dobierku je 0,99 €; pri platbe kartou vopred bez poplatku.</span></div></li>
   </ul>
   <a class="suplink" href="#sastav">Zloženie</a>
@@ -273,6 +274,7 @@ window.lpSlug = function(){
 
   
   <button class="atc" id="atc" onclick="kupi()">OBJEDNAŤ NA DOBIERKU — </button>
+  <p class="promonote" id="promonote">*Black Friday cena 24,99 € platí pre 1 fľaštičku do 30. 11. 2026, raz na zákazníka; zľavový kód BLACKFRIDAY sa v košíku uplatní automaticky. Najnižšia cena za posledných 30 dní pred zľavou: 34,99 € za 1 fľaštičku. Prečiarknutá cena 34,99 € je bežná cena 1 fľaštičky.</p>
 
   
   <div class="chips">
@@ -463,6 +465,14 @@ const OPTS = [
   { title:"Kúp 2, získaj 1 ZDARMA", sub:"3 fľaštičky · 0,77 € na deň · Doprava zadarmo", qty:3, total:68.97, was:68.97, badge:"NAJPOPULÁRNEJŠIE", variantId:"59152081846603", ship:false },
   { title:"Kúp 3, získaj 2 ZDARMA", sub:"5 fľaštičiek · 0,70 € na deň · Doprava zadarmo", qty:5, total:104.95, was:104.95, badge:"NAJVÝHODNEJŠIE", variantId:"59152081879371", ship:false }
 ];
+
+const PROMO = {"code": "BLACKFRIDAY", "until": "2026-11-30T23:59:59+01:00", "qty": 1, "unit": 24.99, "was": 34.99, "badge": "BLACK FRIDAY", "sub": "30 kapsúl · 0,83 € na deň", "ann": "BLACK FRIDAY · otváracia ponuka: 1 fľaštička za <b>24,99 €</b> namiesto 34,99 € — len do 30. 11.", "note": "*Black Friday cena 24,99 € platí pre 1 fľaštičku do 30. 11. 2026, raz na zákazníka; zľavový kód BLACKFRIDAY sa v košíku uplatní automaticky. Najnižšia cena za posledných 30 dní pred zľavou: 34,99 € za 1 fľaštičku. Prečiarknutá cena 34,99 € je bežná cena 1 fľaštičky."};
+const PROMO_ON = !!(PROMO && Date.now() <= Date.parse(PROMO.until));
+const ANN_REGULAR = "PLATBA NA DOBIERKU · DORUČENIE DO 1–2 DNÍ · <b>OD 0,70 € NA DEŇ</b>";
+if (PROMO_ON) OPTS.forEach(function(o){ if (o.qty === PROMO.qty){ o.was = Math.round(PROMO.was * o.qty * 100) / 100;
+  o.total = Math.round(PROMO.unit * o.qty * 100) / 100; if (PROMO.badge) o.badge = PROMO.badge; if (PROMO.sub) o.sub = PROMO.sub; } });
+if (PROMO && !PROMO_ON){ var _an = document.getElementById('annbar'); if (_an) _an.innerHTML = ANN_REGULAR;
+  var _pn = document.getElementById('promonote'); if (_pn) _pn.style.display = 'none'; }
 const GIFTS = [
   {at:1, cap:"PDF sprievodca mužskou formou"},
   {at:5, cap:"Darček-prekvapenie"}
@@ -488,7 +498,7 @@ function renderOpts(){
       <span class="rad"></span>
       <img src="assets/product.jpg" alt="" loading="lazy" decoding="async">
       <div class="t"><b>${o.title}</b><span>${o.sub}</span></div>
-      <div class="pr"><b>${fmt(o.total)}</b></div>
+      <div class="pr"><b>${fmt(o.total)}</b>${o.was > o.total ? '<s>' + fmt(o.was) + '</s>' : ''}</div>
     </div>`).join('');
   const o = OPTS[sel];
   const pays = o.ship && !SINGLE_SHIPS_FREE;
@@ -538,12 +548,13 @@ function __cq(u){var m=u.match(/:(\d+)(?=,|\?|$)/g)||[];return m.reduce(function
 function __dec(u){var q=__cq(u);
   if(q>=3&&"BUNDLE3_SK_SHIP")u+=(u.indexOf('?')>-1?'&':'?')+'discount='+"BUNDLE3_SK_SHIP";
   else if(q>=2&&"BUNDLE2_SK_SHIP")u+=(u.indexOf('?')>-1?'&':'?')+'discount='+"BUNDLE2_SK_SHIP";
+  else if(typeof PROMO_ON!=='undefined'&&PROMO_ON&&q===PROMO.qty)u+=(u.indexOf('?')>-1?'&':'?')+'discount='+encodeURIComponent(PROMO.code);
   return u;}
 function __ic(u){try{fbq('track','InitiateCheckout',{content_type:'product',num_items:__cq(u),currency:"EUR",
   content_ids:(u.match(/\/cart\/([^?]+)/)||['',''])[1].split(',').map(function(x){return x.split(':')[0]})});}catch(e){}}
 
 var __utm=(function(){var o={};try{var q=new URLSearchParams(location.search);['utm_content','utm_campaign'].forEach(function(k){var v=q.get(k);if(!v){try{v=sessionStorage.getItem('lp_'+k)}catch(e){}}if(v){o[k]=String(v).slice(0,150);try{sessionStorage.setItem('lp_'+k,o[k])}catch(e){}}});}catch(e){}return o;})();
-function __price(id){try{var L=(typeof TIERS!=='undefined'?TIERS:(typeof OPTS!=='undefined'?OPTS:[]));for(var i=0;i<L.length;i++){if(L[i].variantId===id)return L[i].unitC?L[i].unitC/100:(L[i].total/L[i].qty);}}catch(e){}return 0;}
+function __price(id){try{var L=(typeof TIERS!=='undefined'?TIERS:(typeof OPTS!=='undefined'?OPTS:[]));for(var i=0;i<L.length;i++){if(L[i].variantId===id)return L[i].unitC?L[i].unitC/100:(L[i].unit?L[i].unit:(L[i].total/L[i].qty));}}catch(e){}return 0;}
 function __cv(u){var v=0;try{(u.match(/\/cart\/([^?]+)/)||['',''])[1].split(',').forEach(function(x){var p=x.split(':');v+=__price(p[0])*parseInt(p[1]||'1',10);});}catch(e){}return Math.round(v*100)/100;}
 function __atc(u){try{fbq('track','AddToCart',{content_type:'product',num_items:__cq(u),value:__cv(u),currency:'EUR',content_ids:(u.match(/\/cart\/([^?]+)/)||['',''])[1].split(',').map(function(x){return x.split(':')[0]})});}catch(e){}}
 function __go(u){u=__dec(u);__atc(u);__ic(u);setTimeout(function(){location.href=u;},200);}
