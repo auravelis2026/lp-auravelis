@@ -555,12 +555,16 @@ var __utm=(function(){var o={};try{var q=new URLSearchParams(location.search);['
 function __price(id){try{var L=(typeof TIERS!=='undefined'?TIERS:(typeof OPTS!=='undefined'?OPTS:[]));for(var i=0;i<L.length;i++){if(L[i].variantId===id)return L[i].unitC?L[i].unitC/100:(L[i].unit?L[i].unit:(L[i].total/L[i].qty));}}catch(e){}return 0;}
 function __cv(u){var v=0;try{(u.match(/\/cart\/([^?]+)/)||['',''])[1].split(',').forEach(function(x){var p=x.split(':');v+=__price(p[0])*parseInt(p[1]||'1',10);});}catch(e){}return Math.round(v*100)/100;}
 function __atc(u){try{fbq('track','AddToCart',{content_type:'product',num_items:__cq(u),value:__cv(u),currency:'EUR',content_ids:(u.match(/\/cart\/([^?]+)/)||['',''])[1].split(',').map(function(x){return x.split(':')[0]})});}catch(e){}}
-function __go(u){u=__dec(u);__atc(u);__ic(u);setTimeout(function(){location.href=u;},200);}
+
+function __pass(u){try{var q=new URLSearchParams(location.search),add=[];['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid'].forEach(function(k){var v=q.get(k);if(v){try{sessionStorage.setItem('lp_'+k,v)}catch(e){}}else{try{v=sessionStorage.getItem('lp_'+k)}catch(e){}}if(v&&!new RegExp('[?&]'+k+'=').test(u))add.push(k+'='+encodeURIComponent(String(v).slice(0,300)));});if(add.length)u+=(u.indexOf('?')>-1?'&':'?')+add.join('&');}catch(e){}return u;}
+function __vcid(){try{var L=(typeof TIERS!=='undefined'?TIERS:OPTS);return String(L[0].variantId);}catch(e){return '';}}
+function __vcval(){try{return __price(__vcid());}catch(e){return 0;}}
+function __go(u){u=__pass(__dec(u));__atc(u);__ic(u);setTimeout(function(){location.href=u;},200);}
 document.addEventListener('click',function(e){
   var a=e.target&&e.target.closest?e.target.closest('a[href*="/cart/"]'):null;
   if(a){__atc(a.href);__ic(a.href);}
 },true);
-try{fbq('track','ViewContent',{content_type:'product',content_ids:['16149495841099'],content_name:document.title,currency:"EUR"});}catch(e){}
+try{fbq('track','ViewContent',{content_type:'product',content_ids:[__vcid()],content_name:document.title,value:__vcval(),currency:"EUR"});}catch(e){}
 
 (function(){
   var SLUG=window.lpSlug(), sent={};
