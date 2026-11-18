@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>VRCHOL Šilajit Max – shilajit a ashwagandha v jednej kapsule | kapsuly pre mužov</title>
+<link rel="preload" as="image" href="assets/video-poster.jpg" fetchpriority="high">
+
 <link rel="icon" href="https://lp.auravelis.eu/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="https://lp.auravelis.eu/favicon-16.png" sizes="16x16" type="image/png">
 <link rel="apple-touch-icon" href="https://lp.auravelis.eu/apple-touch-icon.png">
@@ -1054,7 +1056,7 @@ try{fbq('track','ViewContent',{content_type:'product',content_ids:[__vcid()],con
   <div class="vpop-bg" data-vclose></div>
   <div class="vpop-box" tabindex="-1">
     <div class="vpop-frame">
-      <video id="vpop-v" playsinline muted preload="none" poster="assets/video-poster.jpg" data-src="assets/video.mp4"></video>
+      <video id="vpop-v" playsinline muted autoplay preload="auto" poster="assets/video-poster.jpg" data-src="assets/video.mp4"></video>
       <button class="vpop-x" type="button" data-vclose aria-label="Zavrieť video">×</button>
       <button class="vpop-snd" type="button" id="vpop-snd" aria-pressed="false">🔇 Zapnúť zvuk</button>
       <div class="vpop-bar"><i id="vpop-bar"></i></div>
@@ -1099,7 +1101,7 @@ try{fbq('track','ViewContent',{content_type:'product',content_ids:[__vcid()],con
   pill.addEventListener('click',function(){ open('pill'); });
   var seen=false; try{ seen=sessionStorage.getItem('lp_vpop')==='1'; }catch(e){}
   if(seen){ pill.hidden=false; }
-  else { setTimeout(function(){ try{ sessionStorage.setItem('lp_vpop','1'); }catch(e){} open('auto'); }, 1500); }
+  else { try{ sessionStorage.setItem('lp_vpop','1'); }catch(e){} requestAnimationFrame(function(){ open('auto'); }); }
 })();
 </script>
 </body>
