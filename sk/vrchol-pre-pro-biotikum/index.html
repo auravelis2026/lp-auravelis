@@ -222,8 +222,9 @@ img{height:auto}
 window.lpSlug = function(){
   try{
     if (!/^https?:$/.test(location.protocol)) return '';
-    var s = location.pathname.replace(/^\/+|\/+$/g, '');
-    return /^[a-z0-9][a-z0-9-]{0,39}$/.test(s) ? s : '';
+
+    var s = location.pathname.replace(/^\/+|\/+$/g, '').replace(/\//g, '-');
+    return /^[a-z0-9][a-z0-9-]{0,44}$/.test(s) ? s : '';
   }catch(e){ return ''; }
 };
 </script>
